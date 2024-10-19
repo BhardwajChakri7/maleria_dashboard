@@ -28,7 +28,7 @@ def display_state_data(state, total_users, positive_cases, negative_cases):
     st.write('---')
 
 # List of states and union territories
-states = "Andhra Pradesh"
+state = "Andhra Pradesh"
 
 # Loop through each state and display its data if present in the summary
 
