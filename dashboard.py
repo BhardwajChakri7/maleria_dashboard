@@ -40,10 +40,3 @@ if not state_data.empty:
         state_data['Positive_Cases'].values[0],
         state_data['Negative_Cases'].values[0]
     )
-
-# Visualization (Optional)
-st.subheader('State Summary')
-st.bar_chart(state_summary.set_index('State'))
-
-# Display the result in a table
-st.table(state_summary)
