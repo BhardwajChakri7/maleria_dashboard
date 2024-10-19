@@ -19,7 +19,7 @@ state_summary = df.groupby('State').agg(
     Negative_Cases=pd.NamedAgg(column='Malaria_diagnosis', aggfunc=lambda x: (x == 'The person is not affected with Malaria 😊').sum())
 ).reset_index()
 
-# Function to display data for a specific state
+# Function to display data for each state
 def display_state_data(state, total_users, positive_cases, negative_cases):
     st.subheader(f'{state}')
     st.write(f'Total Users Registered: {total_users}')
@@ -27,10 +27,12 @@ def display_state_data(state, total_users, positive_cases, negative_cases):
     st.write(f'Negative Cases: {negative_cases}')
     st.write('---')
 
-# Display data for Andhra Pradesh only
+# List of states and union territories
 state = "Andhra Pradesh"
-state_data = state_summary[state_summary['State'] == state]
 
+# Loop through each state and display its data if present in the summary
+
+state_data = state_summary[state_summary['State'] == "Andhra Pradesh"]
 if not state_data.empty:
     display_state_data(
         state,
@@ -38,5 +40,3 @@ if not state_data.empty:
         state_data['Positive_Cases'].values[0],
         state_data['Negative_Cases'].values[0]
     )
-else:
-    st.write(f'No data available for {state}')
