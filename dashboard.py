@@ -32,7 +32,7 @@ state = "Andhra Pradesh"
 
 # Loop through each state and display its data if present in the summary
 
-state_data = state_summary[state_summary['State'] == state]
+state_data = state_summary[state_summary['State'] == "Andhra Pradesh"]
 if not state_data.empty:
     display_state_data(
         state,
