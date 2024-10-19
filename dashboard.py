@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Set page title
-st.title('Malaria Cases Dashboard')
+st.title('Malaria Cases Dashboard by State')
 
 # Load data
 csv_file_path = 'malaria_cases.csv'
@@ -19,12 +19,30 @@ state_summary = df.groupby('State').agg(
     Negative_Cases=pd.NamedAgg(column='Malaria_diagnosis', aggfunc=lambda x: (x == 'The person is not affected with Malaria 😊').sum())
 ).reset_index()
 
-# Display summary data
-st.subheader('State Summary')
-st.write(state_summary)
+# Function to display data for each state
+def display_state_data(state, total_users, positive_cases, negative_cases):
+    st.subheader(f'{state}')
+    st.write(f'Total Users Registered: {total_users}')
+    st.write(f'Positive Cases: {positive_cases}')
+    st.write(f'Negative Cases: {negative_cases}')
+    st.write('---')
+
+# List of states and union territories
+states = "Andhra Pradesh"
+
+# Loop through each state and display its data if present in the summary
+
+state_data = state_summary[state_summary['State'] == state]
+if not state_data.empty:
+    display_state_data(
+        state,
+        state_data['Total_Users'].values[0],
+        state_data['Positive_Cases'].values[0],
+        state_data['Negative_Cases'].values[0]
+    )
 
 # Visualization (Optional)
-st.subheader('Visualization')
+st.subheader('State Summary')
 st.bar_chart(state_summary.set_index('State'))
 
 # Display the result in a table
